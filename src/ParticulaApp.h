@@ -1,4 +1,7 @@
 #pragma once
+#include "BME280.h"
+#include "SDS011.h"
+#include "hardwarestatus.h"
 
 namespace Particula
 {
@@ -6,11 +9,20 @@ namespace Particula
         public:
             ParticulaApp();
         public:
-            void partSensorSleep();
-            void partSensorWake();
-            void tphSensorSleep();
-            void tphSensorWake();
+            bool partSensorSleep(SDS011*,HardwareStatus*);
+            bool partSensorRead(SDS011*,HardwareStatus*)
+            bool partSensorWake(SDS011*,HardwareStatus*);
+            bool tphSensorSleep(BME280*);
+            bool tphSensorRead(BME280*,HardwareStatus*)
+            bool tphSensorWake(BME280*,HardwareStatus*);
+            void addToLoRaMessage(AmbiantSensorMessage*)
 
+        private:
+            double pm25;
+            double pm10;
+            double temperature;
+            double humidity;
+            double pressure;
 
     };
 };
