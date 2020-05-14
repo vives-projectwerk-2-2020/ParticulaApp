@@ -83,26 +83,26 @@ namespace Particula{
         }
 
         void ParticulaApp::partMeasureCycle(SDS011* part_sensor,HardwareStatus* hardwareStatus){
-            consoleMessage(partSensorWake(part_sensor, hardwareStatus), 0);  
+            consoleMessage((char*)partSensorWake(part_sensor, hardwareStatus));  
             ThisThread::sleep_for(PART_SENS_WARMUP_TIME);   
-            consoleMessage(partSensorRead(part_sensor, hardwareStatus), 0);
-            consoleMessage(partSensorSleep(part_sensor, hardwareStatus), 0);
+            consoleMessage((char*)partSensorRead(part_sensor, hardwareStatus));
+            consoleMessage((char*)partSensorSleep(part_sensor, hardwareStatus));
         }
 
         void ParticulaApp::tphMeasureCycle(BME280* tph_sensor,HardwareStatus* hardwareStatus){  
-            consoleMessage(tphSensorWake(tph_sensor, hardwareStatus), 0); 
-            consoleMessage(tphSensorRead(tph_sensor, hardwareStatus), 0);    
-            consoleMessage(tphSensorSleep(tph_sensor), 0);
+            consoleMessage((char*)tphSensorWake(tph_sensor, hardwareStatus)); 
+            consoleMessage((char*)tphSensorRead(tph_sensor, hardwareStatus));    
+            consoleMessage((char*)tphSensorSleep(tph_sensor));
         }
 
         void ParticulaApp::LoRaWANMakeCycle(AmbiantSensorMessage* message,HardwareStatus* hardwareStatus){
-            consoleMessage(addToLoRaMessage(message, hardwareStatus), 0);
-            consoleMessage("[Particula] Measered temperature:  %4.2f °C\r\n", this->temperature);
-            consoleMessage("[Particula] Measered humidity:     %4.2f %%\r\n", this->humidity);
-            consoleMessage("[Particula] Measered pressure:     %4.2f hPa\r\n", this->pressure);
-            consoleMessage("[Particula] Measered PM25:         %4.2f µg/m3\r\n", this->pm25);
-            consoleMessage("[Particula] Measered PM10:         %4.2f µg/m3\r\n", this->pm10);
-            consoleMessage("[Particula] Hardware status (hex): %X \r\n", hardwareStatus->get_state());
+            consoleMessage(addToLoRaMessage(message, hardwareStatus));
+            consoleMessage((char*)"[Particula] Measered temperature:  %4.2f °C\r\n", this->temperature);
+            consoleMessage((char*)"[Particula] Measered humidity:     %4.2f %%\r\n", this->humidity);
+            consoleMessage((char*)"[Particula] Measered pressure:     %4.2f hPa\r\n", this->pressure);
+            consoleMessage((char*)"[Particula] Measered PM25:         %4.2f µg/m3\r\n", this->pm25);
+            consoleMessage((char*)"[Particula] Measered PM10:         %4.2f µg/m3\r\n", this->pm10);
+            consoleMessage((char*)"[Particula] Hardware status (hex): %X \r\n", hardwareStatus->get_state());
         }
 
 
