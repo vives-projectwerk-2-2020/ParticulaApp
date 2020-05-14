@@ -82,9 +82,9 @@ namespace Particula{
 
         }
 
-        void ParticulaApp::partMeasureCycle(SDS011* part_sensor,HardwareStatus* hardwareStatus){
+        void ParticulaApp::partMeasureCycle(SDS011* part_sensor,HardwareStatus* hardwareStatus, int warmupTime){
             consoleMessage((char*)partSensorWake(part_sensor, hardwareStatus));  
-            ThisThread::sleep_for(PART_SENS_WARMUP_TIME);   
+            ThisThread::sleep_for(warmupTime);   
             consoleMessage((char*)partSensorRead(part_sensor, hardwareStatus));
             consoleMessage((char*)partSensorSleep(part_sensor, hardwareStatus));
         }

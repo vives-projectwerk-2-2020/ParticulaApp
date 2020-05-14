@@ -1,4 +1,11 @@
+#if PRODUCTION_ENVIRONMENT
+#define consoleMessage(msg, value1)
+#else
+#define consoleMessage(...) printf(__VA_ARGS__)
+#endif
+
 #pragma once
+
 #include <string>
 #include "BME280.h"
 #include "settings.h"
@@ -12,7 +19,7 @@ namespace Particula
         public:
             ParticulaApp(void);
         public:
-            void partMeasureCycle(SDS011*,HardwareStatus*);
+            void partMeasureCycle(SDS011*,HardwareStatus*, int warmupTime);
             void tphMeasureCycle(BME280*,HardwareStatus*);
             void LoRaWANMakeCycle(AmbiantSensorMessage*,HardwareStatus*);
         private:
