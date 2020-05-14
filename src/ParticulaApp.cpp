@@ -3,8 +3,7 @@ using namespace std;
 
 namespace Particula{
         ParticulaApp::ParticulaApp(){
-            //printf("help");
-            int t =5;
+            /*Make a particula App*/
         }
         char* ParticulaApp::partSensorWake(SDS011* part_sensor,HardwareStatus* hardwareStatus){
             if(part_sensor->wakeUp() == WAKEUP_SUCCESSFULL){
@@ -83,23 +82,28 @@ namespace Particula{
 
         }
 
-        double ParticulaApp::returnTemperature(){
-            return this->temperature;
+        void ParticulaApp::partMeasureCycle(SDS011* part_sensor,HardwareStatus* hardwareStatus){
+            consoleMessage(partSensorWake(part_sensor, hardwareStatus), 0);  
+            ThisThread::sleep_for(PART_SENS_WARMUP_TIME);   
+            consoleMessage(partSensorRead(part_sensor, hardwareStatus), 0);
+            consoleMessage(partSensorSleep(part_sensor, hardwareStatus), 0);
         }
 
-        double ParticulaApp::returnHumidity(){
-            return this->humidity;
+        void ParticulaApp::tphMeasureCycle(BME280* tph_sensor,HardwareStatus* hardwareStatus){  
+            consoleMessage(tphSensorWake(tph_sensor, hardwareStatus), 0); 
+            consoleMessage(tphSensorRead(tph_sensor, hardwareStatus), 0);    
+            consoleMessage(tphSensorSleep(tph_sensor), 0);
         }
 
-        double ParticulaApp::returnPressure(){
-            return this->pressure;
+        void ParticulaApp::LoRaWANMakeCycle(AmbiantSensorMessage* message,HardwareStatus* hardwareStatus){
+            consoleMessage(addToLoRaMessage(message, hardwareStatus), 0);
+            consoleMessage("[Particula] Measered temperature:  %4.2f °C\r\n", this->temperature);
+            consoleMessage("[Particula] Measered humidity:     %4.2f %%\r\n", this->humidity);
+            consoleMessage("[Particula] Measered pressure:     %4.2f hPa\r\n", this->pressure);
+            consoleMessage("[Particula] Measered PM25:         %4.2f µg/m3\r\n", this->pm25);
+            consoleMessage("[Particula] Measered PM10:         %4.2f µg/m3\r\n", this->pm10);
+            consoleMessage("[Particula] Hardware status (hex): %X \r\n", hardwareStatus->get_state());
         }
 
-        double ParticulaApp::returnPm25(){
-            return this->pm25;
-        }
 
-        double ParticulaApp::returnPm10(){
-            return this->pm10;
-        }
 };

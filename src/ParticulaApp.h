@@ -1,10 +1,10 @@
 #pragma once
 #include <string>
 #include "BME280.h"
+#include "settings.h"
 #include "SDS011.h"
 #include "hardwarestatus.h"
 #include "AmbiantSensorMessage.h"
-#include "hardwarestatus.h"
 
 namespace Particula
 {
@@ -12,6 +12,10 @@ namespace Particula
         public:
             ParticulaApp(void);
         public:
+            void partMeasureCycle(SDS011*,HardwareStatus*);
+            void tphMeasureCycle(BME280*,HardwareStatus*);
+            void LoRaWANMakeCycle(AmbiantSensorMessage*,HardwareStatus*);
+        private:
             char* partSensorSleep(SDS011*,HardwareStatus*);
             char* partSensorRead(SDS011*,HardwareStatus*);
             char* partSensorWake(SDS011*,HardwareStatus*);
@@ -19,12 +23,7 @@ namespace Particula
             char* tphSensorRead(BME280*,HardwareStatus*);
             char* tphSensorWake(BME280*,HardwareStatus*);
             char* addToLoRaMessage(AmbiantSensorMessage*,HardwareStatus*);
-            double returnTemperature();
-            double returnHumidity();
-            double returnPressure();
-            double returnPm25();
-            double returnPm10();
-
+           
         private:
             double pm25 =0.0;
             double pm10 =0.0;
