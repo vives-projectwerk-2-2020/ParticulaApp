@@ -8,7 +8,6 @@
 
 #include <string>
 #include "BME280.h"
-#include "settings.h"
 #include "SDS011.h"
 #include "hardwarestatus.h"
 #include "AmbiantSensorMessage.h"
