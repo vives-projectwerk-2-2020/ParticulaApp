@@ -18,7 +18,7 @@ The ParticulaApp is a library that combines all the necessary librarys of the Pa
 | -pressure : double                                                |
 |-------------------------------------------------------------------|
 | +partMeasureCycle(SDS011*,HardwareStatus*, int warmupTime) : void |
-| +tphMeasureCycle(BME280*,HardwareStatus*) : void                   |
+| +tphMeasureCycle(BME280*,HardwareStatus*) : void                  |
 | +LoRaWANMakeCycle(AmbiantSensorMessage*,HardwareStatus*) : void   |
 | -partSensorSleep(SDS011*,HardwareStatus*) : char*                 |
 | -partSensorRead(SDS011*,HardwareStatus*) :char*                   |
